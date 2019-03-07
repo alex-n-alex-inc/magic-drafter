@@ -27,6 +27,7 @@ const AuthForm = props => {
         <div>
           <button type="submit">{displayName}</button>
         </div>
+        <input type="file" accept="image/*" />
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
