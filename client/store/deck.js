@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from './index'
 
-const initialState = []
+const initialState = {}
 
 //ACTION NAMES
 const SET_DECK = 'SET_DECK'
@@ -16,7 +16,7 @@ export const setDeck = deck => {
   return {type: SET_DECK, deck}
 }
 
-export const addCardToDeck = card => {
+export const addDeckCard = card => {
   return {type: ADD_DECK_CARD, card}
 }
 
@@ -40,11 +40,18 @@ export const deck = (state = initialState, action) => {
     case SET_DECK:
       return action.deck
     case ADD_DECK_CARD:
-      // if (state.length > 0){
-      //     const matchCards = state.filter(
-      //     card => card.data.arena_id === action.card.data.arena_id
-      // )}
-      return [...state, action.card]
+      return {
+        ...state,
+        [action.card.name]: {
+          cardData: action.card,
+          quantity: state[action.card.name]
+            ? state[action.card.name].quantity + 1
+            : 1
+        }
+      }
+    case REMOVE_DECK_CARD:
+      const {[action.card.name]: toRemove, ...newState} = state
+      return newState
     default:
       return state
   }

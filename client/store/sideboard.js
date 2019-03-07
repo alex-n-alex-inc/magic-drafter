@@ -27,7 +27,7 @@ export default function(state = {}, action) {
         }
       }
     case REMOVE_SIDEBOARD_CARD:
-      const {[action.card.name]: _, ...newState} = state
+      const {[action.card.name]: toRemove, ...newState} = state
       return newState
     case emptySideboard:
       return {}
