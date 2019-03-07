@@ -1,0 +1,19 @@
+{
+  "name": "magic-drafter",
+  "version": "1.0.0",
+  "description": "Interactive mobile deck planner for MTG(Magic: The Gathering) draft events. Created using Google Vision for image recognition, React-Bootstrap for client side, and Skryfall for card database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-n-alex-inc/magic-drafter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-n-alex-inc/magic-drafter/issues"
+  },
+  "homepage": "https://github.com/alex-n-alex-inc/magic-drafter#readme"
+}
