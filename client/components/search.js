@@ -19,7 +19,7 @@ import axios from 'axios'
 class Search extends Component {
   constructor() {
     super()
-    this.state = {search: '', card: null}
+    this.state = {search: '', card: null, image: null}
   }
   handleChange = event => {
     event.preventDefault()
@@ -34,6 +34,64 @@ class Search extends Component {
     const card = await axios.get(`/api/cards/search/${searchTerm}`)
     console.log(card)
     this.setState({search: '', card})
+  }
+  handleImage = async evt => {
+    const readFileAsDataURL = inputFile => {
+      const temporaryFileReader = new FileReader()
+
+      return new Promise((resolve, reject) => {
+        temporaryFileReader.onerror = () => {
+          temporaryFileReader.abort()
+          reject(new DOMException('Problem parsing input file.'))
+        }
+
+        temporaryFileReader.onload = () => {
+          resolve(temporaryFileReader.result)
+        }
+        temporaryFileReader.readAsDataURL(inputFile)
+      })
+    }
+    event.preventDefault()
+
+    let files = evt.target.files
+    let file = files[0]
+
+    if (files && file) {
+      const ImageData = await readFileAsDataURL(file)
+
+      const base64Image = ImageData.split(',', 2)[1]
+
+      console.log('base 64 image data:', base64Image)
+      this.setState({...this.state, image: base64Image})
+    }
+
+    //     console.log(event.target.files)
+    //     const files = Array.from(event.target.files)
+
+    //     const image = files[0]
+    //     const reader = new FileReader();
+    //  await reader.readAsText(image)
+    //  const imageData = reader.result
+    //    console.log('image data:', imageData)
+
+    //     console.log('base64 image:', base64Image)
+    // this.setState({...this.state, image: base64Image})
+  }
+  submitImage = async () => {
+    try {
+      const response = await axios.post('/api/vision/image', {
+        image: this.state.image
+      })
+      console.log('vision response', response.data)
+      const fullText = response.data.responses[0].fullTextAnnotation.text.split(
+        '\n'
+      )
+      console.log('fullText', fullText)
+      this.setState({search: fullText[0]})
+      this.search()
+    } catch (err) {
+      console.error(err)
+    }
   }
   render() {
     if (this.state.card) {
@@ -69,7 +127,13 @@ class Search extends Component {
                 />
               </Form.Group>
             </Form>
-            <Button onClick={this.search}>Search</Button>
+            <Button onClick={this.search}>Search by name</Button>
+          </Row>
+          <Row>
+            <Form>
+              <input type="file" accept="image/*" onChange={this.handleImage} />
+            </Form>
+            <Button onClick={this.submitImage}>Search by Image</Button>
           </Row>
         </Container>
       )
