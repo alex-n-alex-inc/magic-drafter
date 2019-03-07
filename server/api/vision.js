@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== 'production') require('../../secrets')
 router.post('/image', async (req, res, next) => {
   try {
     if (process.env.GOOGLE_VISION_API_KEY) {
+      const api_key = process.env.GOOGLE_VISION_API_KEY
       const newReq = {
         requests: [
           {
@@ -21,7 +22,7 @@ router.post('/image', async (req, res, next) => {
         ]
       }
       const text = await axios.post(
-        `https://vision.googleapis.com/v1/images:annotate?key=${api_key.key}`,
+        `https://vision.googleapis.com/v1/images:annotate?key=${api_key}`,
         newReq
       )
       // if(text.data.responses[0].fullTextAnnotation){

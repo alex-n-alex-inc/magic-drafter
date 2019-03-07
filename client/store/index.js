@@ -4,8 +4,9 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import {deck} from './deck'
+import sideboard from './sideboard'
 
-const reducer = combineReducers({user, deck})
+const reducer = combineReducers({user, deck, sideboard})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

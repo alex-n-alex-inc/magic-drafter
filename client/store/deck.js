@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from './index'
 
-const initialState = []
+const initialState = {}
 
 //ACTION NAMES
 const SET_DECK = 'SET_DECK'
@@ -16,7 +16,7 @@ export const setDeck = deck => {
   return {type: SET_DECK, deck}
 }
 
-export const addCardToDeck = card => {
+export const addDeckCard = card => {
   return {type: ADD_DECK_CARD, card}
 }
 
@@ -40,49 +40,18 @@ export const deck = (state = initialState, action) => {
     case SET_DECK:
       return action.deck
     case ADD_DECK_CARD:
-      // if (state.length > 0){
-      //     const matchCards = state.filter(
-      //     card => card.data.arena_id === action.card.data.arena_id
-      // )}
-      return [...state, action.card]
-    default:
-      return state
-  }
-}
-
-export const cart = (state = initialState, action) => {
-  switch (action.type) {
-    case SET_CART:
-      return action.cart
-    case ADD_CART_ITEM:
-      if (state.length > 0) {
-        let matchItem = state.filter(
-          lineItem => lineItem.beer.id === action.lineItem.beer.id
-        )
-        if (matchItem.length > 0) {
-          let returnState = state.filter(lineItem => {
-            return lineItem.beer.id !== action.lineItem.beer.id
-          })
-          matchItem[0].quantity =
-            parseInt(matchItem[0].quantity, 10) +
-            parseInt(action.lineItem.quantity, 10)
-          return [...returnState, matchItem[0]]
+      return {
+        ...state,
+        [action.card.name]: {
+          cardData: action.card,
+          quantity: state[action.card.name]
+            ? state[action.card.name].quantity + 1
+            : 1
         }
       }
-      return [...state, action.lineItem]
-    case REMOVE_CART_ITEM:
-      return state.filter(lineItem => {
-        return lineItem.beer.id !== action.beer.id
-      })
-    case CHANGE_ITEM_QTY:
-      return [
-        ...state.filter(lineItem => {
-          return lineItem.beer.id !== action.lineItem.beer.id
-        }),
-        action.lineItem
-      ]
-    case EMPTY_CART:
-      return []
+    case REMOVE_DECK_CARD:
+      const {[action.card.name]: toRemove, ...newState} = state
+      return newState
     default:
       return state
   }

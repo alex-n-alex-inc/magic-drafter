@@ -12,7 +12,7 @@ import {
   Container,
   Card
 } from 'react-bootstrap'
-import {addCardToDeck} from '../store/deck'
+import {addDeckCard} from '../store/deck'
 import React, {Component} from 'react'
 import axios from 'axios'
 
@@ -147,7 +147,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: card => dispatch(addCardToDeck(card))
+    addCard: card => dispatch(addDeckCard(card))
   }
 }
 
