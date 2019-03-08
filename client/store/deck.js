@@ -1,6 +1,3 @@
-import axios from 'axios'
-import store from './index'
-
 const initialState = {}
 
 //ACTION NAMES
@@ -33,9 +30,7 @@ export const emptyDeck = () => {
   return {type: EMPTY_DECK}
 }
 
-//Thunks
-
-export const deck = (state = initialState, action) => {
+export default function(state = initialState, action) {
   switch (action.type) {
     case SET_DECK:
       return action.deck
