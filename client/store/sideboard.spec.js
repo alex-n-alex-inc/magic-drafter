@@ -1,7 +1,9 @@
 import {expect} from 'chai'
-import sideboard, {addSideboardCard, removeSideboardCard} from './sideboard'
+import sideboardReducer, {
+  addSideboardCard,
+  removeSideboardCard
+} from './sideboard'
 import fakeStateTester from './fakeStoreStateTester'
-import configureMockStore from 'redux-mock-store'
 
 describe('Sideboard State', () => {
   let sideboardStore
@@ -10,7 +12,7 @@ describe('Sideboard State', () => {
   const initialState = {sampleCard: {sampleCard, quantity: 1}}
 
   beforeEach(() => {
-    sideboardStore = new fakeStateTester(initialState, sideboard)
+    sideboardStore = new fakeStateTester(initialState, sideboardReducer)
   })
 
   afterEach(() => {
