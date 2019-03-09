@@ -19,3 +19,30 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+.black {
+  color: black;
+}
+
+.blue {
+  color: blue;
+}
+.grey {
+  color: grey;
+}
+.white {
+  color: lightgrey;
+}
+
+.modal-Img {
+  height: 100%;
+  width: 100%;
+}
