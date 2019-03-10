@@ -16,7 +16,7 @@ function getClassName(char) {
       case 'W':
         return 'ms ms-w white'
       default:
-        return ''
+        return `ms ms-${char} grey`
     }
 }
 
