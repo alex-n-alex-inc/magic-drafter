@@ -6,10 +6,11 @@ export const setOrder = order => {
   return {type: SET_ORDER, order}
 }
 
-export const sortByCost = cardList => {
-  return cardList.sort(
-    (cardA, cardB) => cardA.cardData.cmc - cardB.cardData.cmc
+export const sortByCost = (cardList, direction = 1) => dispatch => {
+  const sortedCardOrder = cardList.sort(
+    (cardA, cardB) => (cardA.cardData.cmc - cardB.cardData.cmc) * direction
   )
+  dispatch(setOrder(sortedCardOrder))
 }
 
 export default function(state = [], action) {
