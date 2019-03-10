@@ -16,11 +16,11 @@ function getClassName(char) {
       case 'W':
         return 'ms ms-w white'
       default:
-        return `ms ms-${char} grey`
+        return ''
     }
 }
 
-export class InlineCard extends Component {
+export default class InlineCard extends Component {
   constructor(props) {
     super(props)
     this.state = {show: false}
