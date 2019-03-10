@@ -8,9 +8,9 @@ export default class AllCards extends Component {
       this.props.cardOrder.length && (
         <Container>
           {' '}
-          {this.props.cardOrder.map(card => {
+          {this.props.cardOrder.map((card, idx) => {
             return (
-              <Row key={card.cardData.name}>
+              <Row key={idx}>
                 <InlineCard card={card} />
               </Row>
             )

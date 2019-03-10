@@ -10,23 +10,18 @@ import {
   ConnectedSearch
 } from './components'
 import {me} from './store'
-import allCardsWrapper from './components/allCardsWrapper'
+import WrappedAllCards from './components/WrappedAllCards'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  constructor(props) {
-    super(props)
-    this.WrappedAllDeckCards = allCardsWrapper()
-  }
   componentDidMount() {
     this.props.loadInitialData()
   }
 
   render() {
     const {isLoggedIn} = this.props
-    const WrappedAllDeckCards = this.WrappedAllDeckCards
 
     return (
       <Switch>
@@ -36,7 +31,7 @@ class Routes extends Component {
         <Route path="/search" component={ConnectedSearch} />
         <Route
           path="/deck"
-          render={() => <WrappedAllDeckCards allCards={this.props.deck} />}
+          render={() => <WrappedAllCards allCards={this.props.deck} />}
         />
         <Route path="/sideboard" component={ConnectedAllCards} />
         {isLoggedIn && (

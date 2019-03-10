@@ -32,36 +32,36 @@ export class InlineCard extends Component {
                   {'  '}
                   {card.cardData.type_line}
                   {'   '}
-                  {card.cardData.mana_cost.split('').map(char => {
+                  {card.cardData.mana_cost.split('').map((char, idx) => {
                     switch (char) {
                       case 'U':
-                        return <i className="ms ms-u blue" />
+                        return <i key={idx} className="ms ms-u blue" />
                       case 'G':
-                        return <i className="ms ms-g green" />
+                        return <i key={idx} className="ms ms-g green" />
                       case 'B':
-                        return <i className="ms ms-b black" />
+                        return <i key={idx} className="ms ms-b black" />
                       case 'R':
-                        return <i className="ms ms-r red" />
+                        return <i key={idx} className="ms ms-r red" />
                       case 'W':
-                        return <i className="ms ms-w white" />
+                        return <i key={idx} className="ms ms-w white" />
                       case '1':
-                        return <i className="ms ms-1 grey" />
+                        return <i key={idx} className="ms ms-1 grey" />
                       case '2':
-                        return <i className="ms ms-2 grey" />
+                        return <i key={idx} className="ms ms-2 grey" />
                       case '3':
-                        return <i className="ms ms-3 grey" />
+                        return <i key={idx} className="ms ms-3 grey" />
                       case '4':
-                        return <i className="ms ms-4 grey" />
+                        return <i key={idx} className="ms ms-4 grey" />
                       case '5':
-                        return <i className="ms ms-5 grey" />
+                        return <i key={idx} className="ms ms-5 grey" />
                       case '6':
-                        return <i className="ms ms-6 grey" />
+                        return <i key={idx} className="ms ms-6 grey" />
                       case '7':
-                        return <i className="ms ms-7 grey" />
+                        return <i key={idx} className="ms ms-7 grey" />
                       case '8':
-                        return <i className="ms ms-8 grey" />
+                        return <i key={idx} className="ms ms-8 grey" />
                       case '9':
-                        return <i className="ms ms-9 grey" />
+                        return <i key={idx} className="ms ms-9 grey" />
                       default:
                         break
                     }
