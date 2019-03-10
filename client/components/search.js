@@ -1,17 +1,5 @@
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
-import {
-  Button,
-  Row,
-  Col,
-  Table,
-  Image,
-  Form,
-  Container,
-  Card
-} from 'react-bootstrap'
+import {Button, Row, Col, Form, Container, Card} from 'react-bootstrap'
 import {addDeckCard} from '../store/deck'
 import React, {Component} from 'react'
 import axios from 'axios'
@@ -141,16 +129,10 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {deck: state.deck}
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     addCard: card => dispatch(addDeckCard(card))
   }
 }
 
-export const ConnectedSearch = connect(mapStateToProps, mapDispatchToProps)(
-  Search
-)
+export const ConnectedSearch = connect(null, mapDispatchToProps)(Search)
