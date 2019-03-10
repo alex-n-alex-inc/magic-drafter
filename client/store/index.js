@@ -5,8 +5,9 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import deck from './deck'
 import sideboard from './sideboard'
+import cardOrder from './cardOrder'
 
-const reducer = combineReducers({user, deck, sideboard})
+const reducer = combineReducers({user, deck, sideboard, cardOrder})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

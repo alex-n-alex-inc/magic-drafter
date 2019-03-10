@@ -1,34 +1,22 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import {Container, Row} from 'react-bootstrap'
-import {InlineCard} from './inlineCard'
+import InlineCard from './inlineCard'
 
-class AllCards extends Component {
-  constructor(props) {
-    super(props)
-  }
-
+export default class AllCards extends Component {
   render() {
-    if (this.props.deck) {
-      return (
+    return (
+      this.props.cardOrder.length && (
         <Container>
           {' '}
-          {Object.keys(this.props.deck).map(cardName => {
-            const card = this.props.deck[cardName]
+          {this.props.cardOrder.map((card, idx) => {
             return (
-              <Row>
+              <Row key={idx}>
                 <InlineCard card={card} />
               </Row>
             )
           })}
         </Container>
       )
-    }
+    )
   }
 }
-
-const mapStateToProps = state => {
-  return {deck: state.deck}
-}
-
-export const ConnectedAllCards = connect(mapStateToProps)(AllCards)

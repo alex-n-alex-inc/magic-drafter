@@ -1,20 +1,9 @@
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {logout} from '../store'
-import {
-  Button,
-  Row,
-  Col,
-  Table,
-  Image,
-  Form,
-  Container,
-  Card
-} from 'react-bootstrap'
-import {addDeckCard} from '../store/deck'
+import {Button, Row, Col, Form, Container, Card} from 'react-bootstrap'
 import React, {Component} from 'react'
 import axios from 'axios'
+import {addDeckCard} from '../store/deck'
+import {addSideboardCard} from '../store/sideboard'
 
 class Search extends Component {
   constructor() {
@@ -26,7 +15,11 @@ class Search extends Component {
     this.setState({search: event.target.value})
   }
   addToDeck = () => {
-    this.props.addCard(this.state.card.data)
+    this.props.addCardToDeck(this.state.card.data)
+    this.setState({search: '', card: null})
+  }
+  addToSideboard = () => {
+    this.props.addCardToSideboard(this.state.card.data)
     this.setState({search: '', card: null})
   }
   search = async () => {
@@ -110,6 +103,7 @@ class Search extends Component {
             </Col>
           </Row>
           <Button onClick={this.addToDeck}>Add to Deck</Button>
+          <Button onClick={this.addToSideboard}>Add to Sideboard</Button>
         </Container>
       )
     } else {
@@ -141,16 +135,11 @@ class Search extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {deck: state.deck}
-}
-
 const mapDispatchToProps = dispatch => {
   return {
-    addCard: card => dispatch(addDeckCard(card))
+    addCardToDeck: card => dispatch(addDeckCard(card)),
+    addCardToSideboard: card => dispatch(addSideboardCard(card))
   }
 }
 
-export const ConnectedSearch = connect(mapStateToProps, mapDispatchToProps)(
-  Search
-)
+export const ConnectedSearch = connect(null, mapDispatchToProps)(Search)
