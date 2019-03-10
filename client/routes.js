@@ -6,22 +6,27 @@ import {
   Login,
   Signup,
   UserHome,
-  Search,
   ConnectedAllCards,
   ConnectedSearch
 } from './components'
 import {me} from './store'
+import allCardsWrapper from './components/allCardsWrapper'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+  constructor(props) {
+    super(props)
+    this.WrappedAllDeckCards = allCardsWrapper(this.props.deck)
+  }
   componentDidMount() {
     this.props.loadInitialData()
   }
 
   render() {
     const {isLoggedIn} = this.props
+    const WrappedAllDeckCards = this.WrappedAllDeckCards
 
     return (
       <Switch>
@@ -29,7 +34,8 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/search" component={ConnectedSearch} />
-        <Route path="/deck" component={ConnectedAllCards} />
+        <Route path="/deck" component={WrappedAllDeckCards} />
+        <Route path="/sideboard" component={ConnectedAllCards} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -50,7 +56,9 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    deck: state.deck,
+    sideboard: state.sideboard
   }
 }
 

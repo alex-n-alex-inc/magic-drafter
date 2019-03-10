@@ -51,6 +51,7 @@
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.6.2",
+    "query-string": "^6.3.0",
     "react": "^16.4.2",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.4.2",
