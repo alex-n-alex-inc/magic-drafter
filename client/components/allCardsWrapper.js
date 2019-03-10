@@ -5,15 +5,20 @@ import {sortByCost} from '../store/cardOrder'
 import AllCards from './allCards'
 
 // connects either deck or sideboard to allcards view prop
-export default function(allCards) {
+export default function() {
   class WrappedAllCards extends Component {
+    componentDidMount() {
+      console.log('mounting')
+      this.props.sortByCost(Object.values(this.props.allCards))
+    }
+
     render() {
       // parse the query params to see if there was any filter or sort
-      const {filter, sort} = querystring.parse(this.props.location.search)
+      //const {filter, sort} = querystring.parse(this.props.location.search)
       // on default: no sort or filter
-      if (!filter && !sort) {
-        this.props.sortByCost([...allCards])
-      }
+      //if (!filter && !sort) {
+      //this.props.sortByCost(Object.values(this.props.allCards))
+      //}
       return <AllCards cardOrder={this.props.cardOrder} />
     }
   }

@@ -8,8 +8,9 @@ export const setOrder = order => {
 
 export const sortByCost = cardList => dispatch => {
   const sortedCard = cardList.sort(
-    (cardA, cardB) => cardA.cardData.cost - cardB.cardData.cost
+    (cardA, cardB) => cardA.cardData.cmc - cardB.cardData.cmc
   )
+  console.log('sorting by cost')
   dispatch(setOrder(sortedCard))
 }
 

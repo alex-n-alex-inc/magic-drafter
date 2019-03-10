@@ -18,7 +18,7 @@ import allCardsWrapper from './components/allCardsWrapper'
 class Routes extends Component {
   constructor(props) {
     super(props)
-    this.WrappedAllDeckCards = allCardsWrapper(this.props.deck)
+    this.WrappedAllDeckCards = allCardsWrapper()
   }
   componentDidMount() {
     this.props.loadInitialData()
@@ -34,7 +34,10 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/search" component={ConnectedSearch} />
-        <Route path="/deck" component={WrappedAllDeckCards} />
+        <Route
+          path="/deck"
+          render={() => <WrappedAllDeckCards allCards={this.props.deck} />}
+        />
         <Route path="/sideboard" component={ConnectedAllCards} />
         {isLoggedIn && (
           <Switch>
