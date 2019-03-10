@@ -1,6 +1,25 @@
 import React, {Component} from 'react'
 import {Container, Card, Row, Col, Modal, Image} from 'react-bootstrap'
 
+function getClassName(char) {
+  if (char % 1 === 0) return `ms ms-${char} grey`
+  else
+    switch (char) {
+      case 'U':
+        return 'ms ms-u blue'
+      case 'G':
+        return 'ms ms-g green'
+      case 'B':
+        return 'ms ms-b black'
+      case 'R':
+        return 'ms ms-r red'
+      case 'W':
+        return 'ms ms-w white'
+      default:
+        return ''
+    }
+}
+
 export class InlineCard extends Component {
   constructor(props) {
     super(props)
@@ -33,38 +52,7 @@ export class InlineCard extends Component {
                   {card.cardData.type_line}
                   {'   '}
                   {card.cardData.mana_cost.split('').map((char, idx) => {
-                    switch (char) {
-                      case 'U':
-                        return <i key={idx} className="ms ms-u blue" />
-                      case 'G':
-                        return <i key={idx} className="ms ms-g green" />
-                      case 'B':
-                        return <i key={idx} className="ms ms-b black" />
-                      case 'R':
-                        return <i key={idx} className="ms ms-r red" />
-                      case 'W':
-                        return <i key={idx} className="ms ms-w white" />
-                      case '1':
-                        return <i key={idx} className="ms ms-1 grey" />
-                      case '2':
-                        return <i key={idx} className="ms ms-2 grey" />
-                      case '3':
-                        return <i key={idx} className="ms ms-3 grey" />
-                      case '4':
-                        return <i key={idx} className="ms ms-4 grey" />
-                      case '5':
-                        return <i key={idx} className="ms ms-5 grey" />
-                      case '6':
-                        return <i key={idx} className="ms ms-6 grey" />
-                      case '7':
-                        return <i key={idx} className="ms ms-7 grey" />
-                      case '8':
-                        return <i key={idx} className="ms ms-8 grey" />
-                      case '9':
-                        return <i key={idx} className="ms ms-9 grey" />
-                      default:
-                        break
-                    }
+                    return <i key={idx} className={getClassName(char)} />
                   })}
                 </Card.Text>
 
