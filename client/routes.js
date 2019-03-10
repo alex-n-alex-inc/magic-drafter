@@ -33,7 +33,10 @@ class Routes extends Component {
           path="/deck"
           render={() => <WrappedAllCards allCards={this.props.deck} />}
         />
-        <Route path="/sideboard" component={ConnectedAllCards} />
+        <Route
+          path="/sideboard"
+          render={() => <WrappedAllCards allCards={this.props.sideboard} />}
+        />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

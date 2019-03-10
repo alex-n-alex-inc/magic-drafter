@@ -1,12 +1,11 @@
 import React, {Component} from 'react'
 import querystring from 'query-string'
-import {connect} from 'react-redux'
 import {sortByCost} from '../store/cardOrder'
 import AllCards from './allCards'
-class WrappedAllCards extends Component {
+export default class WrappedAllCards extends Component {
   componentDidMount() {
     console.log('mounting')
-    this.props.sortByCost(Object.values(this.props.allCards))
+    //this.props.sortByCost(Object.values(this.props.allCards))
   }
 
   render() {
@@ -16,16 +15,9 @@ class WrappedAllCards extends Component {
     //if (!filter && !sort) {
     //this.props.sortByCost(Object.values(this.props.allCards))
     //}
-    return <AllCards cardOrder={this.props.cardOrder} />
+    const cardOrder = this.props.allCards
+      ? sortByCost(Object.values(this.props.allCards))
+      : []
+    return <AllCards cardOrder={cardOrder} />
   }
 }
-
-const mapState = state => ({
-  cardOrder: state.cardOrder
-})
-
-const mapDispatch = dispatch => ({
-  sortByCost: cardArray => dispatch(sortByCost(cardArray))
-})
-
-export default connect(mapState, mapDispatch)(WrappedAllCards)
