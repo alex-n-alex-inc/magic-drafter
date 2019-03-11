@@ -30,7 +30,7 @@ export default function(state = [], action) {
           : [
               ...state.slice(0, idx),
               {...toReduce, quantity: toReduce.quantity - 1},
-              ...state.slice(idx)
+              ...state.slice(idx + 1)
             ]
       return newOrder
     default:

@@ -17,7 +17,7 @@ const collect = dndConnect => ({
 const MoveBin = ({connectDropTarget, collectionType}) => {
   return connectDropTarget(
     <div className="move-bin">
-      Move To {`${collectionType === 'Deck' ? collectionType : 'Sideboard'}`}
+      Move To {`${collectionType !== 'Deck' ? collectionType : 'Sideboard'}`}
     </div>
   )
 }
