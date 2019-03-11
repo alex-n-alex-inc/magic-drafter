@@ -98,8 +98,9 @@ const DragCard = ({
   connectDragPreview,
   isDragging
 }) => {
+  const opacity = isDragging ? 0.5 : 1
   let DragCardComponent = (
-    <div className="container" opacity={isDragging ? 0.5 : 1}>
+    <div className="container" style={{opacity}}>
       <InlineCard card={card} />
     </div>
   )
