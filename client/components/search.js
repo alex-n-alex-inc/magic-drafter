@@ -8,7 +8,7 @@ import {addSideboardCard} from '../store/sideboard'
 class Search extends Component {
   constructor() {
     super()
-    this.state = {search: '', card: null, image: null}
+    this.state = {search: '', card: null, image: null, loading: false}
   }
   handleChange = event => {
     event.preventDefault()
@@ -20,15 +20,17 @@ class Search extends Component {
   }
   addToSideboard = () => {
     this.props.addCardToSideboard(this.state.card.data)
-    this.setState({search: '', card: null})
+    this.setState({search: '', card: null, loading: false})
   }
   search = async () => {
+    this.setState({...this.state, loading: true})
     const searchTerm = this.state.search.split(' ').join('+')
     const card = await axios.get(`/api/cards/search/${searchTerm}`)
     console.log(card)
-    this.setState({search: '', card})
+    this.setState({search: '', card, loading: false})
   }
   handleImage = async evt => {
+    this.setState({...this.state, loading: true})
     const readFileAsDataURL = inputFile => {
       const temporaryFileReader = new FileReader()
 
@@ -55,8 +57,9 @@ class Search extends Component {
       const base64Image = ImageData.split(',', 2)[1]
 
       console.log('base 64 image data:', base64Image)
-      this.setState({...this.state, image: base64Image})
+      this.setState({...this.state, image: base64Image, loading: false})
     }
+    this.setState({...this.state, loading: false})
 
     //     console.log(event.target.files)
     //     const files = Array.from(event.target.files)
@@ -72,6 +75,7 @@ class Search extends Component {
   }
   submitImage = async () => {
     try {
+      this.setState({...this.state, loading: true})
       const response = await axios.post('/api/vision/image', {
         image: this.state.image
       })
@@ -80,15 +84,23 @@ class Search extends Component {
         '\n'
       )
       console.log('fullText', fullText)
-      this.setState({search: fullText[0]})
+      this.setState({search: fullText[0], loading: false})
       this.search()
     } catch (err) {
+      this.setState({...this.state, loading: false})
       console.error(err)
     }
   }
   render() {
-    if (this.state.card) {
+    if (this.state.loading) {
+      return (
+        <div className="loader">
+          <h1>loading</h1>
+        </div>
+      )
+    } else if (this.state.card) {
       const card = this.state.card.data
+
       return (
         <Container>
           <Row>

@@ -65,7 +65,8 @@
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "victory": "^32.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

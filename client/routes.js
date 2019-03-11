@@ -11,6 +11,7 @@ import {
 } from './store/sideboard'
 import {addDeckCard, removeDeckCard, emptyDeck} from './store/deck'
 import {me} from './store'
+import {ConnectedDeckAnalysis} from './components/deckAnalysis'
 
 /**
  * COMPONENT
@@ -29,6 +30,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/search" component={ConnectedSearch} />
+        <Route path="/analysis" component={ConnectedDeckAnalysis} />
         <Route
           path="/deck"
           render={() => (
