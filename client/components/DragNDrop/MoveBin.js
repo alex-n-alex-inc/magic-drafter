@@ -4,21 +4,20 @@ import ItemTypes from './ItemTypes'
 
 const binTarget = {
   drop(props, monitor) {
-    const {moveCard} = props
+    const {onDrop} = props
     const {card, idx} = monitor.getItem()
-    moveCard(card.cardData)
+    onDrop(card.cardData, idx)
   }
 }
 
-const collect = (connect, monitor) => ({
-  connectDropTarget: connect.dropTarget()
+const collect = dndConnect => ({
+  connectDropTarget: dndConnect.dropTarget()
 })
 
 const MoveBin = ({connectDropTarget, collectionType}) => {
   return connectDropTarget(
     <div className="move-bin">
-      Move To <b />
-      {`${collectionType === 'Deck' ? collectionType : 'Sideboard'}`}
+      Move To {`${collectionType === 'Deck' ? collectionType : 'Sideboard'}`}
     </div>
   )
 }
