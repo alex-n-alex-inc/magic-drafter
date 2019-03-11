@@ -2,6 +2,7 @@ import React from 'react'
 import ItemTypes from './ItemTypes'
 import {DragSource} from 'react-dnd'
 import InlineCard from '../inlineCard'
+import DragCardPreview from './DragCardPreview'
 
 const cardSource = {
   beginDrag(props) {
@@ -28,6 +29,7 @@ const DragCard = ({
   let WrappedInlineCard = (
     <div className="container" style={{opacity}}>
       <InlineCard card={card} />
+      {isDragging && <DragCardPreview />}
     </div>
   )
 

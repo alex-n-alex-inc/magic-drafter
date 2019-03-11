@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {sortByCost, reduceCard} from '../store/cardOrder'
 import AllCards from './allCards'
-import DragCardPreview from './DragNDrop/DragCardPreview'
 import MoveBin from './DragNDrop/MoveBin'
 
 class WrappedAllCards extends Component {
@@ -19,7 +18,6 @@ class WrappedAllCards extends Component {
     return this.props.cardOrder.length ? (
       <div className="container">
         <AllCards cardOrder={this.props.cardOrder} />
-        <DragCardPreview />
         <MoveBin
           collectionType={this.props.collectionType}
           moveCard={this.props.moveCard}
