@@ -6,7 +6,7 @@ const collect = monitor => {
   const item = monitor.getItem()
   return {
     card: item && item.card,
-    currentOffset: monitor.getSourceClientOffset(),
+    currentOffset: monitor.getDifferenceFromInitialOffset(),
     isDragging: monitor.isDragging()
   }
 }
@@ -17,7 +17,7 @@ const getCardStyles = currentOffset => {
       display: 'none'
     }
   }
-
+  console.log(currentOffset)
   const x = currentOffset.x
   const y = currentOffset.y
   const transform = `translate(${x}px, ${y}px)`
@@ -30,9 +30,7 @@ const getCardStyles = currentOffset => {
 }
 
 const DragCardPreview = ({card, currentOffset, isDragging}) => {
-  return !isDragging ? (
-    ''
-  ) : (
+  return !isDragging ? null : (
     <div className="container" style={getCardStyles(currentOffset)}>
       <InlineCard card={card} />
     </div>

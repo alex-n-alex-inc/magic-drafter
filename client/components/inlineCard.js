@@ -33,6 +33,7 @@ const cardSource = {
 
 const cardCollector = (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
+  connectDragPreview: connect.dragPreview(),
   isDragging: monitor.isDragging()
 })
 
@@ -91,11 +92,21 @@ export class InlineCard extends Component {
   }
 }
 
-const DragCard = ({card, connectDragSource, isDragging}) =>
-  connectDragSource(
-    <div className="container">
+const DragCard = ({
+  card,
+  connectDragSource,
+  connectDragPreview,
+  isDragging
+}) => {
+  let DragCardComponent = (
+    <div className="container" opacity={isDragging ? 0.5 : 1}>
       <InlineCard card={card} />
     </div>
   )
+
+  DragCardComponent = connectDragSource(DragCardComponent)
+  DragCardComponent = connectDragPreview(DragCardComponent)
+  return DragCardComponent
+}
 
 export default DragSource(ItemTypes.CARD, cardSource, cardCollector)(DragCard)
