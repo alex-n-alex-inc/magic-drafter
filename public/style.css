@@ -46,3 +46,14 @@ form div {
   height: 100%;
   width: 100%;
 }
+
+.move-bin {
+  position: fixed;
+  left: 80%;
+  bottom: 0;
+  width: 10%;
+  background-color: lightskyblue;
+  border-radius: 30px;
+  color: black;
+  text-align: center;
+}

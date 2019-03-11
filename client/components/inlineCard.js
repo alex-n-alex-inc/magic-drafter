@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Container, Card, Row, Col, Modal, Image} from 'react-bootstrap'
-
 function getClassName(char) {
   if (char % 1 === 0) return `ms ms-${char} grey`
   else
@@ -28,7 +27,6 @@ export default class InlineCard extends Component {
   }
   handleClick() {
     this.state.show ? this.setState({show: false}) : this.setState({show: true})
-    console.log('clicked')
   }
 
   render() {

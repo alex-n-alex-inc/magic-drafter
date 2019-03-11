@@ -27,7 +27,17 @@ export default function(state = {}, action) {
         }
       }
     case REMOVE_SIDEBOARD_CARD:
-      const {[action.card.name]: toRemove, ...newState} = state
+      const {[action.card.name]: toRemove, ...otherCards} = state
+      const newState =
+        toRemove.quantity <= 1
+          ? otherCards
+          : {
+              ...otherCards,
+              [toRemove.cardData.name]: {
+                cardData: toRemove.cardData,
+                quantity: toRemove.quantity - 1
+              }
+            }
       return newState
     case emptySideboard:
       return {}

@@ -21,11 +21,6 @@ export const removeDeckCard = card => {
   return {type: REMOVE_DECK_CARD, card}
 }
 
-export const changeCardQuantity = (card, quantity) => {
-  const cardItem = {card, quantity}
-  return {type: CHANGE_CARD_QTY, cardItem}
-}
-
 export const emptyDeck = () => {
   return {type: EMPTY_DECK}
 }
@@ -45,8 +40,20 @@ export default function(state = initialState, action) {
         }
       }
     case REMOVE_DECK_CARD:
-      const {[action.card.name]: toRemove, ...newState} = state
+      const {[action.card.name]: toRemove, ...otherCards} = state
+      const newState =
+        toRemove.quantity <= 1
+          ? otherCards
+          : {
+              ...otherCards,
+              [toRemove.cardData.name]: {
+                cardData: toRemove.cardData,
+                quantity: toRemove.quantity - 1
+              }
+            }
       return newState
+    case EMPTY_DECK:
+      return {}
     default:
       return state
   }

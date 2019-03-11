@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {sortByCost} from '../store/cardOrder'
+import {sortByCost, reduceCard} from '../store/cardOrder'
 import AllCards from './allCards'
+import DragCardPreview from './DragNDrop/DragCardPreview'
+import MoveBin from './DragNDrop/MoveBin'
 
 class WrappedAllCards extends Component {
   componentDidMount() {
@@ -9,13 +11,24 @@ class WrappedAllCards extends Component {
   }
 
   componentDidUpdate(lastProps) {
-    console.log(this.props.session)
-    lastProps.allCards !== this.props.allCards &&
+    lastProps.collectionType !== this.props.collectionType &&
       this.props.sortOrderbyCMC(Object.values(this.props.allCards))
   }
 
   render() {
-    return <AllCards cardOrder={this.props.cardOrder} />
+    return this.props.cardOrder.length ? (
+      <div className="container">
+        <AllCards cardOrder={this.props.cardOrder} />
+        <DragCardPreview />
+        <MoveBin
+          collectionType={this.props.collectionType}
+          moveCard={this.props.moveCard}
+          onDrop={this.props.handleDrop}
+        />
+      </div>
+    ) : (
+      'No Cards'
+    )
   }
 }
 
@@ -23,9 +36,13 @@ const mapState = state => ({
   cardOrder: state.cardOrder
 })
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch, ownProps) => ({
   sortOrderbyCMC: (cardsArr, direction) =>
-    dispatch(sortByCost(cardsArr, direction))
+    dispatch(sortByCost(cardsArr, direction)),
+  handleDrop: (cardData, idx) => {
+    ownProps.moveCard(cardData)
+    dispatch(reduceCard(idx))
+  }
 })
 
 export default connect(mapState, mapDispatch)(WrappedAllCards)
