@@ -31,11 +31,18 @@ class Routes extends Component {
         <Route path="/search" component={ConnectedSearch} />
         <Route
           path="/deck"
-          render={() => <WrappedAllCards allCards={this.props.deck} />}
+          render={() => (
+            <WrappedAllCards allCards={this.props.deck} collectionType="Deck" />
+          )}
         />
         <Route
           path="/sideboard"
-          render={() => <WrappedAllCards allCards={this.props.sideboard} />}
+          render={() => (
+            <WrappedAllCards
+              allCards={this.props.sideboard}
+              collectionType="Sideboard"
+            />
+          )}
         />
         {isLoggedIn && (
           <Switch>
