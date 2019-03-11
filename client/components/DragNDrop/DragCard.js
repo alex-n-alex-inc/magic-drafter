@@ -6,7 +6,7 @@ import InlineCard from '../inlineCard'
 const cardSource = {
   beginDrag(props) {
     return {
-      id: props.id,
+      idx: props.idx,
       card: props.card
     }
   }
@@ -20,8 +20,6 @@ const cardCollector = (connect, monitor) => ({
 
 const DragCard = ({
   card,
-  id,
-
   connectDragSource,
   connectDragPreview,
   isDragging
@@ -29,7 +27,7 @@ const DragCard = ({
   const opacity = isDragging ? 0.5 : 1
   let WrappedInlineCard = (
     <div className="container" style={{opacity}}>
-      <InlineCard card={card} id={id} />
+      <InlineCard card={card} />
     </div>
   )
 

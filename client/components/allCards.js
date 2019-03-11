@@ -10,7 +10,7 @@ export default class AllCards extends Component {
         {this.props.cardOrder.map((card, idx) => {
           return (
             <Row key={card.cardData.name}>
-              <DragCard card={card} id={idx} />
+              <DragCard card={card} idx={idx} />
             </Row>
           )
         })}

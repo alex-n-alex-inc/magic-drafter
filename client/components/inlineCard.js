@@ -27,7 +27,6 @@ export default class InlineCard extends Component {
   }
   handleClick() {
     this.state.show ? this.setState({show: false}) : this.setState({show: true})
-    console.log('clicked')
   }
 
   render() {
@@ -72,22 +71,4 @@ export default class InlineCard extends Component {
       )
     }
   }
-}
-
-const DragCard = ({
-  card,
-  connectDragSource,
-  connectDragPreview,
-  isDragging
-}) => {
-  const opacity = isDragging ? 0.5 : 1
-  let DragCardComponent = (
-    <div className="container" style={{opacity}}>
-      <InlineCard card={card} />
-    </div>
-  )
-
-  DragCardComponent = connectDragSource(DragCardComponent)
-  DragCardComponent = connectDragPreview(DragCardComponent)
-  return DragCardComponent
 }

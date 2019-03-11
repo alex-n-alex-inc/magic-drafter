@@ -2,15 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {
-  Login,
-  Signup,
-  UserHome,
-  ConnectedAllCards,
-  ConnectedSearch
-} from './components'
-import {me} from './store'
+import {Login, Signup, UserHome, ConnectedSearch} from './components'
 import WrappedAllCards from './components/WrappedAllCards'
+import {
+  addSideboardCard,
+  removeSideboardCard,
+  emptySideboard
+} from './store/sideboard'
+import {addDeckCard, removeDeckCard, emptyDeck} from './store/deck'
+import {me} from './store'
 
 /**
  * COMPONENT
@@ -32,7 +32,14 @@ class Routes extends Component {
         <Route
           path="/deck"
           render={() => (
-            <WrappedAllCards allCards={this.props.deck} collectionType="Deck" />
+            <WrappedAllCards
+              allCards={this.props.deck}
+              collectionType="Deck"
+              moveCard={cardData => {
+                this.props.addCardToSideboard(cardData)
+                this.props.removeCardFromDeck(cardData)
+              }}
+            />
           )}
         />
         <Route
@@ -41,6 +48,10 @@ class Routes extends Component {
             <WrappedAllCards
               allCards={this.props.sideboard}
               collectionType="Sideboard"
+              moveCard={cardData => {
+                this.props.addCardToDeck(cardData)
+                this.props.removeCardFromSideboard(cardData)
+              }}
             />
           )}
         />
@@ -74,6 +85,24 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    addCardToDeck(cardData) {
+      dispatch(addDeckCard(cardData))
+    },
+    addCardToSideboard(cardData) {
+      dispatch(addSideboardCard(cardData))
+    },
+    removeCardFromDeck(cardData) {
+      dispatch(removeDeckCard(cardData))
+    },
+    removeCardFromSideboard(cardData) {
+      dispatch(removeSideboardCard(cardData))
+    },
+    emptyDeckCollection() {
+      dispatch(emptyDeck())
+    },
+    emptySideboardCollection() {
+      dispatch(emptySideboard())
     }
   }
 }
