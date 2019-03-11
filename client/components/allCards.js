@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Container, Row} from 'react-bootstrap'
-import InlineCard from './inlineCard'
+import DragCard from './DragNDrop/DragCard'
 
 export default class AllCards extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class AllCards extends Component {
         {this.props.cardOrder.map((card, idx) => {
           return (
             <Row key={card.cardData.name}>
-              <InlineCard card={card} id={idx} />
+              <DragCard card={card} id={idx} />
             </Row>
           )
         })}

@@ -1,6 +1,6 @@
 import React from 'react'
 import {DragLayer} from 'react-dnd'
-import {InlineCard} from '../inlineCard'
+import InlineCard from '../inlineCard'
 
 const collect = monitor => {
   const item = monitor.getItem()
@@ -17,7 +17,6 @@ const getCardStyles = currentOffset => {
       display: 'none'
     }
   }
-  console.log(currentOffset)
   const x = currentOffset.x
   const y = currentOffset.y
   const transform = `translate(${x}px, ${y}px)`

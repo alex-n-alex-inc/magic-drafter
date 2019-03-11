@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 import {Container, Card, Row, Col, Modal, Image} from 'react-bootstrap'
-import ItemTypes from './DragNDrop/ItemTypes'
-import {DragSource} from 'react-dnd'
-
 function getClassName(char) {
   if (char % 1 === 0) return `ms ms-${char} grey`
   else
@@ -22,22 +19,7 @@ function getClassName(char) {
     }
 }
 
-const cardSource = {
-  beginDrag(props) {
-    return {
-      id: props.id,
-      card: props.card
-    }
-  }
-}
-
-const cardCollector = (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  connectDragPreview: connect.dragPreview(),
-  isDragging: monitor.isDragging()
-})
-
-export class InlineCard extends Component {
+export default class InlineCard extends Component {
   constructor(props) {
     super(props)
     this.state = {show: false}
@@ -109,5 +91,3 @@ const DragCard = ({
   DragCardComponent = connectDragPreview(DragCardComponent)
   return DragCardComponent
 }
-
-export default DragSource(ItemTypes.CARD, cardSource, cardCollector)(DragCard)
